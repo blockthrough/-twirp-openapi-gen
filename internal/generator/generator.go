@@ -20,7 +20,6 @@ type generatorConfig struct {
 	docVersion string
 	pathPrefix string
 	format     string
-	verbose    bool
 }
 
 type Option func(config *generatorConfig) error

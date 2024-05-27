@@ -1,4 +1,6 @@
 # editors
 .idea
+.vscode
 
 /build
+doc.json

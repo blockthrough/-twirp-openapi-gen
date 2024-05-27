@@ -64,7 +64,7 @@ func TestGenerator(t *testing.T) {
 			name:   "GetPet",
 			input:  "GetPetRequest",
 			output: "GetPetResponse",
-			desc:   "GetPet returns details about a pet\nIt accepts a pet id as an input and returns back the matching pet object\nreq-example: { \"pet_id\": \"123\" }\nreq-example: { \"pet_id\": \"456\" }\nres-example: { \"pet\": {\"name\": \"toby\"} }",
+			desc:   "GetPet returns details about a pet\nIt accepts a pet id as an input and returns back the matching pet object",
 		},
 	}
 	messages := []ProtoMessage{
@@ -127,6 +127,10 @@ func TestGenerator(t *testing.T) {
 					itemsRef:  "#/components/schemas/pet.v1.Vet",
 					itemsType: "object",
 				},
+				{
+					name:      "mappings",
+					fieldType: "object",
+				},
 			},
 		},
 	}
@@ -139,14 +143,14 @@ func TestGenerator(t *testing.T) {
 				t.Errorf("%s: missing rpc %q", pathName, rpc.name)
 			}
 
-			if path.Description != rpc.desc {
-				t.Errorf("%s: expected desc %q but got %q", pathName, rpc.desc, path.Description)
-			}
-
 			post := path.Post
 			if post == nil {
 				t.Errorf("%s: missing post", pathName)
 				continue
+			}
+
+			if post.Description != rpc.desc {
+				t.Errorf("%s: expected desc %q but got %q", pathName, rpc.desc, post.Description)
 			}
 
 			if post.Summary != rpc.name {

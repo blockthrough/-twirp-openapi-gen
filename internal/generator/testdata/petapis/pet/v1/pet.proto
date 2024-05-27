@@ -72,6 +72,10 @@ message UpdatePetResponse {
 
 message PurchasePetResponse {}
 
+message MapItem {
+  string field = 1;
+}
+
 // Pet represents a pet in the pet store.
 message Pet {
   PetType pet_type = 1;
@@ -103,13 +107,11 @@ message Pet {
 
   google.protobuf.Struct metadata = 103;
 
+  map<string, MapItem> mappings = 104;
+
 // TODO(dm): add support for oneof
 //  oneof test_oneof {
 //    string p1 = 7;
 //    int32 p2 = 8;
 //  }
-
-// TODO(dm): add support for maps
-//  map<string, Medication> medications = 9;
-//  map<string, int32> vet_visits_by_month = 10;
 }

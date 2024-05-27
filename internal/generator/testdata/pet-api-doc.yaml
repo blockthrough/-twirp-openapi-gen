@@ -131,6 +131,11 @@ components:
                 pet:
                     $ref: '#/components/schemas/pet.v1.Pet'
             type: object
+        pet.v1.MapItem:
+            properties:
+                field:
+                    type: string
+            type: object
         pet.v1.Pet:
             description: Pet represents a pet in the pet store.
             properties:
@@ -143,6 +148,10 @@ components:
                     type: array
                 labels:
                     $ref: '#/components/schemas/google.protobuf.ListValue'
+                mappings:
+                    additionalProperties:
+                        $ref: '#/components/schemas/pet.v1.MapItem'
+                    type: object
                 metadata:
                     $ref: '#/components/schemas/google.protobuf.Struct'
                 name:
@@ -238,7 +247,7 @@ paths:
             summary: DeletePet
     /pet.v1.PetStoreService/GetPet:
         post:
-            description: |4-
+            description: |-
                 GetPet returns details about a pet
                 It accepts a pet id as an input and returns back the matching pet object
             requestBody:
